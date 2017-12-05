@@ -1,6 +1,6 @@
 # Discord Tip Bot for BTC RPCs
 
-A BTC tip bot made for Discord with MariaDB/MySQL.
+A BTC tip bot made for Discord with MariaDB/MySQL, based off the modular (and unsecure) ERC20 Tip Bot [here](https://github.com/kayabaNerve/erc20-tip-bot-old-unsafe). This one isn't modular, yet it would be easy to modify this bot to work off ERC20s or other database systems.
 
 To install the dependencies, run `npm i`.
 
