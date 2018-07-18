@@ -39,9 +39,21 @@ To install the bot:
         - `table` set to the name of the table you made for the bot.
         - `user` set to the name of a MySQL user with access to the DB.
         - `pass` set to the password of that MySQL user.
-- Set up pools. Either delete or modify the one in settings.json.
+- Create a Discord Bot User.
+    - Go to https://discordapp.com/developers/applications/me.
+    - Click `New App`.
+    - Enter a name, and optionally, upload an icon.
+    - Click `Create a Bot User`.
+    - Grab the `Client ID` from the top, and go to this link: https://discordapp.com/oauth2/authorize?client_id=!!CLIENT_ID!!&scope=bot&permissions=68672, after replacing !!CLIENT_ID!! with the bot's client ID. This will allow you to add the bot to a server with the proper permissions of Read Messages/Send Messages/Add Reactions (the last one is only necessary if you use giveaways).
+    - Edit the `settings.json` file's `discord` var to include:
+        - `token` set to the bot user token. This is not the client user.
+        - `user` set to the value gotten by right-clicking the bot on your server and clicking `Copy ID`. This requires `Developer Mode` to be enabled on your Discord client.
+- Set up pools. Either delete or modify the ones in settings.json.
     - `admins` control who can add/remove members.
     - `members` is anyone who can spend the money in the pool.
+- Set up any channel locked commands in `settings.json`'s `commands` var.
+    - If you wish to lock a command to a channel, edit `example` to be the name of the command, and `ROOM ID` to be the value gotten from right-clicking a room and clicking `Copy ID`. You can add multiple channel IDs to the array.
+    - To setup more channel locks, simply copy the `example` template and fill it our properly.
 - Install NodeJS dependencies via `npm i`.
 
 All pools must be created via settings.json. All edits to the list of admins must also be done there. Members can be added and removed with `!pool NAME add @USER` and `!pool name remove @USER`, where NAME is the name of the pool, and @USER is a ping of the Discord user.
@@ -51,7 +63,7 @@ There is also a giveaway command to run giveaways with. If you don't want it, ei
 Neither of these commands are documented as they are only to be used by whoever runs the bot, and that is not most people. It's not for security via obscurity, but rather because a long help file where half the commands aren't needed is annoying.
 
 Want to donate?
-
+```
 BTC: 3N9H8RJ8SZrziNCYFQLcKKDxEDDwu2Lucr
-
 Ether/ERC20s: 0x00ba72Ec3944495C21f16F9E29320850F67353Fd
+```

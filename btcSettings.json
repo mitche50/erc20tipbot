@@ -21,7 +21,11 @@
         "pass": "pass"
     },
 
-    "commands": {},
+    "commands": {
+        "example": [
+            "CHANNEL ID"
+        ]
+    },
 
     "pools": {
         "pool": {
