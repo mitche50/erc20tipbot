@@ -1,0 +1,23 @@
+#Environment variables/settings file.
+.env
+settings.json
+
+#NPM packages.
+node_modules/
+.npm
+
+# Output of 'npm pack'.
+*.tgz
+
+#REPL history.
+.node_repl_history
+
+#Logs.
+logs
+*.log
+npm-debug.log*
+
+#Runtime data.
+pids
+*.pid
+*.pid.lock

@@ -1,0 +1,43 @@
+{
+    "discord": {
+        "token": "M discord bot user token",
+        "user": "BOT USER ID"
+    },
+
+    "coin": {
+        "type": "erc20",
+        "symbol": "ERC",
+        "decimals": 16,
+        "withdrawFee": 1,
+        "addresses": {
+            "wallet": "0x0000000000000000000000000000000000000000",
+            "contract": "0x0000000000000000000000000000000000000000"
+        },
+        "ipc": "/home/user/.ethereum/geth.ipc"
+    },
+
+    "mysql": {
+        "db": "tipbot",
+        "table": "btc",
+        "user": "rooot",
+        "pass": "pass"
+    },
+
+    "commands": {},
+
+    "pools": {
+        "pool": {
+            "printName": "Pool",
+            "admins": [
+                "USER ID"
+            ],
+            "members": []
+        },
+
+        "giveaways": {
+            "printName": "Giveaways",
+            "admins": [],
+            "members": []
+        }
+    }
+}

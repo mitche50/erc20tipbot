@@ -1,13 +1,17 @@
 {
-  "name": "btc-tipbot",
-  "version": "1.0.0",
-  "description": "BTC Discord TipBot.",
-  "main": "main.js",
-  "author": "Luke Parker/Luke Kayaba/TechAspirer/Kayaba/kayabaNerve and 17robots",
-  "license": "MIT",
-  "dependencies": {
-    "bitcoin": "^3.0.1",
-    "discord.js": "^11.2.1",
-    "mysql": "^2.15.0"
-  }
+    "name": "tip-bot",
+    "version": "1.0.0",
+    "description": "A BTC and ERC20 TipBot for Discord.",
+    "main": "main.js",
+    "author": "Luke Parker/kayabaNerve",
+    "license": "MIT",
+    "dependencies": {
+        "bignumber.js": "^7.2.1",
+        "bitcoin-core": "^2.0.0",
+        "discord.js": "^11.3.2",
+        "promise-mysql": "^3.3.1"
+    },
+    "devDependencies": {
+        "eslint": "^5.1.0"
+    }
 }

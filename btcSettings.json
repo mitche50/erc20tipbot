@@ -1,0 +1,41 @@
+{
+    "discord": {
+        "token": "M discord bot user token",
+        "user": "BOT USER ID"
+    },
+
+    "coin": {
+        "type": "btc",
+        "symbol": "BTC",
+        "decimals": 8,
+        "withdrawFee": 0.01,
+        "port": 8332,
+        "user": "user",
+        "pass": "pass"
+    },
+
+    "mysql": {
+        "db": "tipbot",
+        "table": "btc",
+        "user": "rooot",
+        "pass": "pass"
+    },
+
+    "commands": {},
+
+    "pools": {
+        "pool": {
+            "printName": "Pool",
+            "admins": [
+                "USER ID"
+            ],
+            "members": []
+        },
+
+        "giveaways": {
+            "printName": "Giveaways",
+            "admins": [],
+            "members": []
+        }
+    }
+}
