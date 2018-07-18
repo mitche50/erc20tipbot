@@ -1,5 +1,11 @@
 //BN lib.
 var BN = require("bignumber.js");
+BN.config({
+    ROUNDING_MODE: BN.ROUND_DOWN,
+    EXPONENTIAL_AT: process.settings.coin.decimals + 1
+});
+
+var symbol = process.settings.coin.symbol;
 
 module.exports = async (msg) => {
     //Check the argument count.
@@ -30,7 +36,7 @@ module.exports = async (msg) => {
 
     //If we were unable to subtract the proper amount...
     if (!(await process.core.users.subtractBalance(msg.sender, amountWFee))) {
-        msg.obj.reply("Your number is either invalid, negative, or you don't have enough. Remember, you must also have extra SOV to pay the fee.");
+        msg.obj.reply("Your number is either invalid, negative, or you don't have enough. Remember, you must also have extra " + symbol + " to pay the fee.");
         return;
     }
 

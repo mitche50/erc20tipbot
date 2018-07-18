@@ -1,5 +1,9 @@
 //BN lib.
 var BN = require("bignumber.js");
+BN.config({
+    ROUNDING_MODE: BN.ROUND_DOWN,
+    EXPONENTIAL_AT: process.settings.coin.decimals + 1
+});
 
 //Vars from the settings.
 var pools = process.settings.pools;

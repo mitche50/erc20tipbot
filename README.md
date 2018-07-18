@@ -15,7 +15,7 @@ To install the bot:
     - Edit the `settings.json` file's `coin` var to have:
         - `type` set to `"BTC"`.
         - `symbol` set to the coin's symbol ("BTC").
-        - `decimals` set to the amount of the coin's decimals (8).
+        - `decimals` set to the amount of the coin's decimals (8). Optionally, you may set a lower amount of decimals so users can't tip satoshis.
         - `port` set to the daemon's RPC port (8337).
         - `user` set to the username you set in the conf file ("user").
         - `pass` set to the password you set in the conf file ("pass").
@@ -56,7 +56,7 @@ To install the bot:
     - To setup more channel locks, simply copy the `example` template and fill it our properly.
 - Install NodeJS dependencies via `npm i`.
 
-All pools must be created via settings.json. All edits to the list of admins must also be done there. Members can be added and removed with `!pool NAME add @USER` and `!pool name remove @USER`, where NAME is the name of the pool, and @USER is a ping of the Discord user.
+All pools must be created via settings.json. All edits to the list of admins must also be done there. Members can be added and removed with `!pool NAME add @USER` and `!pool NAME remove @USER`, where NAME is the name of the pool, and @USER is a ping of the Discord user. To send from a pool, use `!tip POOL @USER AMOUNT`.
 
 There is also a giveaway command to run giveaways with. If you don't want it, either don't setup the `giveaways` pool or comment out the line that loads it in `main.js`. To use it, run `!giveaway Ts Ww A`, where T is the time in seconds (or use "m" as a suffix for minutes), W is the amount of winners, and A is the amount each win. The amount will come from the `giveaways` pool and be tipped out to the winners.
 

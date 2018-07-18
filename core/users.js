@@ -1,6 +1,10 @@
 //MySQL and BN libs.
 var mysql = require("promise-mysql");
 var BN = require("bignumber.js");
+BN.config({
+    ROUNDING_MODE: BN.ROUND_DOWN,
+    EXPONENTIAL_AT: process.settings.coin.decimals + 1
+});
 
 //Definition of the table: `name VARCHAR(64), address VARCHAR(64), balance VARCHAR(64), notify tinyint(1)`.
 
