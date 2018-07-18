@@ -167,6 +167,12 @@ module.exports = async () => {
         }
     }
 
+    //Make sure all the pools have accounts.
+    for (i in process.settings.pools) {
+        //Create an account for each. If they don't have one, this will do nothing.
+        await create(i);
+    }
+
     //Return all the functions.
     return {
         create: create,
