@@ -51,5 +51,7 @@ There is also a giveaway command to run giveaways with. If you don't want it, ei
 Neither of these commands are documented as they are only to be used by whoever runs the bot, and that is not most people. It's not for security via obscurity, but rather because a long help file where half the commands aren't needed is annoying.
 
 Want to donate?
+
 BTC: 3N9H8RJ8SZrziNCYFQLcKKDxEDDwu2Lucr
+
 Ether/ERC20s: 0x00ba72Ec3944495C21f16F9E29320850F67353Fd
