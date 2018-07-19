@@ -14,9 +14,9 @@ async function formatTime(time) {
     if (time >= 60) {
         minutes = Math.floor(time/60);
         if (minutes !== 1) {
-            minutes = minutes + " minutes,";
+            minutes = minutes + " minutes, ";
         } else {
-            minutes = minutes + "minute,";
+            minutes = minutes + " minute, ";
         }
     }
 
