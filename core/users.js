@@ -8,7 +8,7 @@ BN.config({
 
 //Definition of the table: `name VARCHAR(64), address VARCHAR(64), balance VARCHAR(64), notify tinyint(1)`.
 
-///MySQL connection and table vars.
+//MySQL connection and table vars.
 var connection, table;
 
 //RAM cache of users.
@@ -195,8 +195,15 @@ module.exports = async () => {
 //Every thirty seconds, check the TXs of each user.
 setInterval(async () => {
     for (var user in users) {
+        //If that user doesn't have an address, continue.
+        if (users[user].address === false) {
+            continue;
+        }
+
         //Declare the amount of new TXs.
         var newTXs = 0;
+        //Declare the amount deposited.
+        var deposited = BN(0);
         //Get the TXs.
         var txs = await process.core.coin.getTransactions(users[user].address);
 
@@ -207,13 +214,15 @@ setInterval(async () => {
             if (handled.indexOf(txs[i].txid) === -1) {
                 //Increment the new TXs count.
                 newTXs++;
-                //Add the TX value to the user's balance.
-                setTimeout(async () => {
-                    addBalance(user, BN(txs[i].amount));
-                }, newTXs * 500);
+                //Add the TX value to the deposited amount.
+                deposited = deposited.plus(BN(txs[i].amount))
                 //Push the TX ID so we don't handle it again.
                 handled.push(txs[i].txid);
             }
+        }
+
+        if (deposited.gte("0.00001")) {
+            addBalance(user, deposited);
         }
     }
 }, 30 * 1000);

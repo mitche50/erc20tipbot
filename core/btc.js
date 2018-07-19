@@ -57,6 +57,11 @@ module.exports = async () => {
                 txs[txsTemp[i].address] = [];
             }
 
+            //Make sure the TX has 1 confirm.
+            if (txsTemp[i].confirmations < 1) {
+                continue;
+            }
+
             //Push each TX to the proper address, if it isn't already there.
             if (
                 txs[txsTemp[i].address].map((tx) => {

@@ -246,10 +246,13 @@ module.exports = async (msg) => {
         }
 
         //Subtract the total from the giveaways pool.
-        process.core.users.subtractBalance("giveaways", amount.times(winners));
+        await process.core.users.subtractBalance("giveaways", amount.times(winners));
         //Distribute to the winners.
         for (i in whoWon) {
-            process.core.users.addBalance(whoWon[i], amount);
+            //Create their account if they don't have one.
+            await process.core.users.create(whoWon[i]);
+            //Add the amount to their balance.
+            await process.core.users.addBalance(whoWon[i], amount);
         }
 
         //Send a new message to the channel about the winners.
