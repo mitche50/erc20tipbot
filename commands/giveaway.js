@@ -60,13 +60,22 @@ async function updateMessage(message, time, winners, amount) {
 }
 
 //End a giveaway.
-async function endMessage(message, time, winners, amount, whoWon) {
+async function endMessage(message, whoWon) {
+    if (whoWon == false) {
+        await message.edit("", {
+            embed: {
+                description: "This giveaway has ended! Sadly, no one entered."
+            }
+        });
+
+        return;
+    }
+
     await message.edit("", {
         embed: {
             description:
-                (await createMessage(time, winners, amount)) +
-                "\r\n\r\nThis giveaway has ended! The winners are:\r\n" +
-                whoWon.join("\r\n")
+                "This giveaway has ended! The winners are:\r\n<@" +
+                whoWon.join(">\r\n<@") + ">"
         }
     });
 }
@@ -178,21 +187,24 @@ module.exports = async (msg) => {
     async function updateTime() {
         //Subtract 5 seconds from the time.
         time = time - 5;
+        //But make sure it is always at least 0.
+        if (time < 0) {
+            time = 0;
+        }
 
         //If the giveaway is over...
-        if (time <= 0) {
-            //If whoWon doesn't equal the amount of winners we should have, wait half a second and then call updateTime again.
-            if (whoWon.length === winners) {
+        if (time === 0) {
+            //If whoWon was set to false, meaning we didn't get enough entries...
+            if (whoWon === false) {
+                await endMessage(giveaway, whoWon);
+            //Else, if whoWon doesn't equal the amount of winners we should have, wait half a second and then call updateTime again.
+            } else if (whoWon.length !== winners) {
                 setTimeout(updateTime, 500);
-                return;
-            //Else, if it was set to false, meaning we didn't get enough entries...
-            } else if (whoWon === false) {
-                await endMessage(giveaway, time, winners, amount, ["Sorry! Not enough people entered."]);
-                return;
-            }
-
             //Else, the giveaway ended properly and we have the winners.
-            await endMessage(giveaway, time, winners, amount, whoWon);
+            } else {
+                await endMessage(giveaway, whoWon);
+            }
+            return;
         }
 
         //If it's still going on. update the message with the new time.
@@ -214,7 +226,7 @@ module.exports = async (msg) => {
         //Make sure someone entered.
         if (users.length === 1) {
             whoWon = false;
-            giveaway.channel.send("Sorry! Not enough people entered.");
+            giveaway.channel.send("No one entered!");
             return;
         }
         //Interate over each user and replace their user with their printable @.

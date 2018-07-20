@@ -200,8 +200,6 @@ setInterval(async () => {
             continue;
         }
 
-        //Declare the amount of new TXs.
-        var newTXs = 0;
         //Declare the amount deposited.
         var deposited = BN(0);
         //Get the TXs.
@@ -212,10 +210,8 @@ setInterval(async () => {
         for (i in txs) {
             //If we haven't handled them...
             if (handled.indexOf(txs[i].txid) === -1) {
-                //Increment the new TXs count.
-                newTXs++;
                 //Add the TX value to the deposited amount.
-                deposited = deposited.plus(BN(txs[i].amount))
+                deposited = deposited.plus(BN(txs[i].amount));
                 //Push the TX ID so we don't handle it again.
                 handled.push(txs[i].txid);
             }
