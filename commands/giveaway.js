@@ -185,8 +185,8 @@ module.exports = async (msg) => {
 
     //Function to update the time.
     async function updateTime() {
-        //Subtract 5 seconds from the time.
-        time = time - 5;
+        //Subtract 10 seconds from the time.
+        time = time - 10;
         //But make sure it is always at least 0.
         if (time < 0) {
             time = 0;
@@ -210,10 +210,10 @@ module.exports = async (msg) => {
         //If it's still going on. update the message with the new time.
         await updateMessage(giveaway, time, winners, amount);
         //Set a new timeout.
-        setTimeout(updateTime, 5000);
+        setTimeout(updateTime, 10000);
     }
-    //Run the function in five seconds.
-    setTimeout(updateTime, 5000);
+    //Run the function in ten seconds.
+    setTimeout(updateTime, 10000);
 
     //Track the reactions.
     giveaway.createReactionCollector((reaction) => {
