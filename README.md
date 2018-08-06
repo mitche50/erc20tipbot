@@ -19,7 +19,7 @@ To install the bot:
         - `port` set to the daemon's RPC port (8337).
         - `user` set to the username you set in the conf file ("user").
         - `pass` set to the password you set in the conf file ("pass").
-- If the coin is anERC20:
+- If the coin is an ERC20:
     - Install `geth`.
     - Run `geth --light --rpc --rpcapi eth,net,web3,personal` to start Geth's with light sync on.
     - Move `erc20Settings.json` to `settings.json`.

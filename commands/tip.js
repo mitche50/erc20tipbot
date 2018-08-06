@@ -19,14 +19,14 @@ module.exports = async (msg) => {
         pool = false;
         from = msg.sender;
         to = msg.text[1].replace("!", ""); //Turn <!@ into <@.
-        amount = BN(msg.text[2]);
+        amount = msg.text[2];
     //Tip from a pool.
     } else if (msg.text.length === 4) {
         //Declare that this a pool tip.
         pool = true;
         //Set the from, and then verify the pool status.
         from = msg.text[1];
-        ///Verify the pool exists.
+        //Verify the pool exists.
         if (Object.keys(pools).indexOf(from) === -1) {
             msg.obj.reply("That pool doesn't exist.");
             return;
@@ -48,15 +48,22 @@ module.exports = async (msg) => {
         }
 
         to = msg.text[2].replace("!", ""); //Turn <!@ into <@.
-        amount = BN(msg.text[3]);
+        amount = msg.text[3];
     //If there was a different argument length, there was the wrong amount of arguments.
     } else {
         msg.obj.reply("You used the wrong amount of arguments.");
         return;
     }
 
-    //Make sure we aren't dealing with < 1 satoshi.
-    amount = BN(amount.toFixed(process.settings.coin.decimals));
+    //If the amount is all...
+    if (amount === "all") {
+        //Set the amount to the user's balance.
+        amount = await process.core.users.getBalance(from);
+    //Else...
+    } else {
+        //Parse amount into a BN, yet make sure we aren't dealing with < 1 satoshi.
+        amount = BN(BN(amount).toFixed(process.settings.coin.decimals));
+    }
 
     //If this is not a valid user, or a pool we're sending to...
     if (

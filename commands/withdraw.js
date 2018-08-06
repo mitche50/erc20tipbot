@@ -14,9 +14,23 @@ module.exports = async (msg) => {
         return;
     }
 
-    //Get the amount (limited to the satoshi), and add the withdraw fee.
-    var amount = BN(BN(msg.text[1]).toFixed(process.settings.coin.decimals));
-    var amountWFee = amount.plus(BN(process.settings.coin.withdrawFee));
+    //Get the amount from the command.
+    var amount = msg.text[1];
+    //Amount with the withdrawl fee.
+    var amountWFee;
+
+    //If the amount is all...
+    if (amount === "all") {
+        //The amount with the fee is the user's balance.
+        amountWFee = await process.core.users.getBalance(msg.sender);
+        //The amount is the balance minus the fee.
+        amount = amountWFee.minus(BN(process.settings.coin.withdrawFee));        
+    //Else...
+    } else {
+        //Parse the amount (limited to the satoshi), and add the withdraw fee.
+        amount = BN(BN(amount).toFixed(process.settings.coin.decimals));
+        amountWFee = amount.plus(BN(process.settings.coin.withdrawFee));
+    }
 
     //Get the address by filtering the message again, but not calling toLowerCase this time since addresses are case sensitive.
     var address = msg.obj.content
