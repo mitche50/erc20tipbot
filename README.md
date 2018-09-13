@@ -21,12 +21,12 @@ To install the bot:
         - `pass` set to the password you set in the conf file ("pass").
 - If the coin is an ERC20:
     - Install `geth`.
-    - Run `geth --light --rpc --rpcapi eth,net,web3,personal` to start Geth's with light sync on.
+    - Run `geth --light --rpc --rpcapi eth,net,web3,personal` to start Geth with light sync on.
     - Move `erc20Settings.json` to `settings.json`.
     - Edit the `settings.json` file's `coin` var to have:
         - `type` set to `"erc20"`.
         - `symbol` set to the coin's symbol ("ERC").
-        - `decimals` set to the amount of the coin's decimals (16).
+        - `decimals` set to the amount of the coin's decimals (18).
         - `ipc` set to Geth's IPC file's path ("/home/user/.ethereum/geth.ipc").
     - Edit the `settings.json` file's `coin.addresses` var to have:
         - `wallet` set to an account address on the Geth node, with a password of "", that will host all the Ether used to fund TXs.
