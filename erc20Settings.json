@@ -7,7 +7,7 @@
     "coin": {
         "type": "erc20",
         "symbol": "ERC",
-        "decimals": 16,
+        "decimals": 18,
         "withdrawFee": 1,
         "addresses": {
             "wallet": "0x0000000000000000000000000000000000000000",
