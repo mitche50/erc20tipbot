@@ -18,8 +18,8 @@
 
     "mysql": {
         "db": "tipbot",
-        "table": "btc",
-        "user": "rooot",
+        "table": "erc",
+        "user": "root",
         "pass": "pass"
     },
 

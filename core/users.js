@@ -218,7 +218,7 @@ setInterval(async () => {
         }
 
         if (deposited.gte("0.00001")) {
-            addBalance(user, deposited);
+            await addBalance(user, deposited);
         }
     }
 }, 30 * 1000);

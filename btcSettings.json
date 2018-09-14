@@ -17,7 +17,7 @@
     "mysql": {
         "db": "tipbot",
         "table": "btc",
-        "user": "rooot",
+        "user": "root",
         "pass": "pass"
     },
 
