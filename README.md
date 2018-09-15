@@ -2,8 +2,6 @@
 
 ### A BTC and ERC20 Tip bot made for Discord, with MySQL as a DB.
 
-### Due to a recent complete redo, the ERC20 file is currently not available.
-
 This code is based off the modular (and not secure) ERC20 Tip Bot [here](https://github.com/kayabaNerve/erc20-tip-bot-old-unsafe). This one does not claim to be modular, yet it should be easy to modify this bot to work off other databases or coin APIs.
 
 To install the bot:
