@@ -19,7 +19,7 @@ To install the bot:
         - `pass` set to the password you set in the conf file ("pass").
 - If the coin is an ERC20:
     - Install `geth`.
-    - Run `geth --light --rpc --rpcapi eth,net,web3,personal` to start Geth with light sync on.
+    - Run `geth --syncmode "light"` to start Geth with light sync on.
     - Move `erc20Settings.json` to `settings.json`.
     - Edit the `settings.json` file's `coin` var to have:
         - `type` set to `"erc20"`.
@@ -60,4 +60,4 @@ There is also a giveaway command to run giveaways with. If you don't want it, ei
 
 Neither of these commands are documented as they are only to be used by whoever runs the bot, and that is not most people. It's not for security via obscurity, but rather because a long help file where half the commands aren't needed is annoying.
 
-Want to donate? 0x9f82b45ec97559ce6e9E57cAf3fa558ab132a54C
+Want to donate? 0xA0F7aAAF3161c5611a904263bFfe45C92394Da44
