@@ -90,6 +90,7 @@ module.exports = async () => {
         //If it's the master address, splice it out.
         if (addresses[i] === master.toLowerCase()) {
             addresses.splice(i, 1);
+            i--;
         }
     }
     
