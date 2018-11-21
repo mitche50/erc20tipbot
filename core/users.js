@@ -216,9 +216,7 @@ setInterval(async () => {
                 handled.push(txs[i].txid);
             }
         }
-
-        if (deposited.gte("0.00001")) {
-            await addBalance(user, deposited);
-        }
+        
+        await addBalance(user, deposited);
     }
 }, 30 * 1000);
