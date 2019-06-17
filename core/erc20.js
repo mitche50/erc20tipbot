@@ -52,7 +52,9 @@ async function createAddress() {
     } while (receipt == null);
 
     if (!(receipt.status)) {
-        console.log("Couldn't send the new address its initial funds.");
+        /*eslint no-console: ["error", {allow: ["error"]}]*/
+        console.error("Couldn't send the new address its initial funds.");
+        return;
     }
 
     //Allow the master to spend every ERC20 the slave gets.
@@ -70,7 +72,9 @@ async function createAddress() {
     } while (receipt == null);
 
     if (!(receipt.status)) {
-        console.log("Couldn't call approve from the new address.");
+        /*eslint no-console: ["error", {allow: ["error"]}]*/
+        console.error("Couldn't call approve from the new address.");
+        return;
     }
 
     //Add the new address to the list of addresses.
@@ -127,7 +131,7 @@ module.exports = async () => {
     //Load every account.
     addresses = [];
     var filenames = fs.readdirSync(process.settings.coin.keys);
-    for (file in filenames) {
+    for (var file in filenames) {
         var wallet = ethjsWallet.fromV3(fs.readFileSync(process.settings.coin.keys + filenames[file]).toString(), "", true);
         //If this isn't the master address, add it to the address array.
         var address = wallet.getChecksumAddressString().toString().toLowerCase();
@@ -176,7 +180,9 @@ module.exports = async () => {
             receipt = await web3.eth.getTransactionReceipt(web3.utils.sha3(transferFrom.rawTransaction));
         } while (receipt == null);
         if (!(receipt.status)) {
-            console.log("Failed to forward the funds.");
+            /*eslint no-console: ["error", {allow: ["error"]}]*/
+            console.error("Failed to forward the funds.");
+            return;
         }
 
         //Verify that worked.
