@@ -2,9 +2,15 @@
     "name": "tip-bot",
     "version": "2.0.0",
     "description": "A BTC and ERC20 TipBot for Discord.",
-    "main": "main.js",
     "author": "Luke Parker/kayabaNerve",
     "license": "MIT",
+    "main": "main.js",
+    
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/kayabaNerve/tip-bot.git"
+    },
+    
     "dependencies": {
         "await-sleep": "0.0.1",
         "bignumber.js": "^7.2.1",

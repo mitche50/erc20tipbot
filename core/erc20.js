@@ -83,13 +83,14 @@ module.exports = async () => {
     
     //Get all the addresses.
     addresses = await web3.eth.getAccounts();
-    for (var i in addresses) {
+    for (var i = 0; i < addresses.length; i++) {
         //Make sure it's lower case.
         addresses[i] = addresses[i].toLowerCase();
         
         //If it's the master address, splice it out.
         if (addresses[i] === master.toLowerCase()) {
             addresses.splice(i, 1);
+            i--;
         }
     }
     

@@ -19,7 +19,7 @@ To install the bot:
         - `pass` set to the password you set in the conf file ("pass").
 - If the coin is an ERC20:
     - Install `geth`.
-    - Run `geth --light --rpc --rpcapi eth,net,web3,personal` to start Geth with light sync on.
+    - Run `geth --syncmode "light"` to start Geth with light sync on.
     - Move `erc20Settings.json` to `settings.json`.
     - Edit the `settings.json` file's `coin` var to have:
         - `type` set to `"erc20"`.
@@ -53,6 +53,7 @@ To install the bot:
     - If you wish to lock a command to a channel, edit `example` to be the name of the command, and `ROOM ID` to be the value gotten from right-clicking a room and clicking `Copy ID`. You can add multiple channel IDs to the array.
     - To setup more channel locks, simply copy the `example` template and fill it our properly.
 - Install NodeJS dependencies via `npm i`.
+    - `discord.js` will print several warnings about requiring a peer but none was installed. These are normal, and refer to optional packages for connecting to voice channels, something we don't do.
 
 All pools must be created via settings.json. All edits to the list of admins must also be done there. Members can be added and removed with `!pool NAME add @USER` and `!pool NAME remove @USER`, where NAME is the name of the pool, and @USER is a ping of the Discord user. To send from a pool, use `!tip POOL @USER AMOUNT`.
 
@@ -60,4 +61,4 @@ There is also a giveaway command to run giveaways with. If you don't want it, ei
 
 Neither of these commands are documented as they are only to be used by whoever runs the bot, and that is not most people. It's not for security via obscurity, but rather because a long help file where half the commands aren't needed is annoying.
 
-Want to donate? 0x9f82b45ec97559ce6e9E57cAf3fa558ab132a54C
+Want to donate? 0xA0F7aAAF3161c5611a904263bFfe45C92394Da44
