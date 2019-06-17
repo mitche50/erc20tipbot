@@ -32,17 +32,23 @@ async function handleMessage(msg) {
     });
 
     //If the start of the message, is a ping to the bot, swap it for !.
-    if (text[0] === process.settings.discord.user) {
+    if (text[0] === process.client.user.toString()) {
         text[1] = "!" + text[1];
         //Also remove the ping.
         text.splice(0, 1);
     }
 
-    //Rejoin with spaces.
-    text = text.join(" ");
+    //Filter the message.
+    text = text
+        .join(" ")                          //Convert it back into a string.
+        .replace(/[^\x00-\x7F]/g, "")       //Remove unicode.
+        .toLowerCase()                      //Convert it to lower case.
+        .replace(new RegExp("\r", "g"), "") //Remove any \r characters.
+        .replace(new RegExp("\n", "g"), "") //Remoce any \n characters.
+        .split(" ");                        //Split it among spaces.
 
     //If the message's first character is not the activation symbol, return.
-    if (text.substr(0, 1) !== "!") {
+    if (text[0].substr(0, 1) !== "!") {
         return;
     }
 
@@ -54,19 +60,14 @@ async function handleMessage(msg) {
         (await process.core.users.getNotify(sender))
     ) {
         //Give them the notified warning.
-        msg.reply("By continuing to use this bot, you agree to release the creator, owners, all maintainers of the bot, and the " + process.settings.coin.symbol + " Team from any legal liability.");
+        msg.reply("By continuing to use this bot, you agree to release the creator, owners, all maintainers of the bot, and the " + process.settings.coin.symbol + " Team from any legal liability.\r\n\r\nPlease run your previous command again.");
         //Mark them as notified.
         await process.core.users.setNotified(sender);
         return;
     }
 
-    //Filter the message.
-    text = text
-        .substring(1, text.length)          //Remove the activation symbol.
-        .toLowerCase()                      //Make it lower case.
-        .replace(new RegExp("\r", "g"), "") //Remove any \r characters.
-        .replace(new RegExp("\n", "g"), "") //Remoce any \n characters.
-        .split(" ");                        //Split it among spaces.
+    //Remove the activation symbol.
+    text[0] = text[0].substring(1, text[0].length);
 
     //If the command is channel locked...
     if (typeof(process.settings.commands[text[0]]) !== "undefined") {
@@ -112,10 +113,14 @@ async function main() {
 
     //Create a Discord process.client.
     process.client = new (require("discord.js")).Client();
+
+    //Handle messages.
     process.client.on("message", handleMessage);
     process.client.on("messageUpdate", async (oldMsg, msg) => {
         handleMessage(msg);
     });
+
+    //Connect.
     process.client.login(process.settings.discord.token);
 }
 
