@@ -9,16 +9,17 @@
         "symbol": "ERC",
         "decimals": 18,
         "withdrawFee": 1,
+        "infura": "wss://mainnet.infura.io/ws/v3/ID",
+        "keys": "/home/tipbot/.ethereum/keystore/",
         "addresses": {
             "wallet": "0x0000000000000000000000000000000000000000",
             "contract": "0x0000000000000000000000000000000000000000"
-        },
-        "ipc": "/home/user/.ethereum/geth.ipc"
+        }
     },
 
     "mysql": {
         "db": "tipbot",
-        "table": "erc",
+        "tips": "tips",
         "user": "root",
         "pass": "pass"
     },
