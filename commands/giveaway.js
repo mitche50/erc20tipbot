@@ -7,7 +7,12 @@ BN.config({
 var pools = process.settings.pools;
 var symbol = process.settings.coin.symbol;
 
-var reactWith = "\r\n\r\nReact with :tada: to enter!";
+var rawEmoji, emoji, reactWith;
+setTimeout(async () => {
+    rawEmoji = process.client.emojis.get(process.settings.discord.giveawayEmoji);
+    emoji = rawEmoji.toString();
+    reactWith = "\r\n\r\nReact with " + emoji + " to enter!";
+}, 5000);
 
 async function formatTime(time) {
     var minutes = "", seconds, verb;
@@ -39,7 +44,7 @@ async function formatWinners(winners) {
 //Creates a message to send.
 async function createMessage(time, winners, amount) {
     return `
-:tada: :tada: **${symbol} GIVEAWAY!** :tada: :tada:
+${emoji} ${emoji} **${symbol} GIVEAWAY!** ${emoji} ${emoji}
 
 
 ${await formatTime(time)}
@@ -178,7 +183,7 @@ module.exports = async (msg) => {
         }
     });
     //React for ease of use.
-    giveaway.react("🎉");
+    giveaway.react(rawEmoji);
 
     //Create the var of who won.
     var whoWon = [];
@@ -217,7 +222,7 @@ module.exports = async (msg) => {
 
     //Track the reactions.
     giveaway.createReactionCollector((reaction) => {
-        return reaction.emoji.name === "🎉";
+        return reaction.emoji.toString() === emoji;
     }, {
         time: time * 1000
     }).on("end", async (collected) => {
@@ -271,7 +276,7 @@ module.exports = async (msg) => {
         giveaway.channel.send({
             embed: {
                 description: `
-:tada: :tada: **${symbol} GIVEAWAY!** :tada: :tada:
+${emoji} ${emoji} **${symbol} GIVEAWAY!** ${emoji} ${emoji}
 
 Congratulations to the winners of **${amount.toString()}** ${symbol} each!
 ${"<@" + whoWon.join(">\r\n<@") + ">"}
