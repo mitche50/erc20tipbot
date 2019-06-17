@@ -140,8 +140,8 @@ module.exports = async () => {
         user: process.settings.mysql.user,
         password: process.settings.mysql.pass
     });
-    //Sets the table from the settings.
-    table = process.settings.mysql.table;
+    //Set the table from the settings.
+    table = process.settings.mysql.tips;
 
     //Init the RAM cache.
     users = {};
@@ -206,8 +206,7 @@ setInterval(async () => {
         var txs = await process.core.coin.getTransactions(users[user].address);
 
         //Iterate over the TXs.
-        var i;
-        for (i in txs) {
+        for (var i in txs) {
             //If we haven't handled them...
             if (handled.indexOf(txs[i].txid) === -1) {
                 //Add the TX value to the deposited amount.
@@ -216,7 +215,7 @@ setInterval(async () => {
                 handled.push(txs[i].txid);
             }
         }
-        
+
         await addBalance(user, deposited);
     }
 }, 30 * 1000);
