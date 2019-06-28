@@ -199,6 +199,7 @@ module.exports = async () => {
 
         //Push the TX.
         txs[data.to].push({
+            txid: event.transactionHash,
             amount: BN(data.value).div(decimalsBN).toString()
         });
     });
