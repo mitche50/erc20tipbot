@@ -108,7 +108,7 @@ async function main() {
         tip:      require("./commands/tip.js"),
         withdraw: require("./commands/withdraw.js"),
         pool:     require("./commands/pool.js"),
-        giveaway: require("./commands/giveaway.js")
+        //giveaway: require("./commands/giveaway.js")
     };
 
     //Create a Discord process.client.

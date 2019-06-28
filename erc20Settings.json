@@ -1,7 +1,8 @@
 {
     "discord": {
         "token": "M discord bot user token",
-        "user": "BOT USER ID"
+        "user": "BOT USER ID",
+        "giveawayEmoji": "593992166502563865"
     },
 
     "coin": {
