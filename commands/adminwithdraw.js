@@ -1,3 +1,10 @@
+//BN lib.
+var BN = require("bignumber.js");
+BN.config({
+    ROUNDING_MODE: BN.ROUND_DOWN,
+    EXPONENTIAL_AT: process.settings.coin.decimals + 1
+});
+
 module.exports = async (msg) => {
     //Only enable this for DM messages
     if (msg.obj.channel.type != "dm") return;
@@ -32,7 +39,7 @@ module.exports = async (msg) => {
     var hash = await process.core.coin.send(address, amount);
     if (typeof(hash) !== "string") {
         msg.obj.reply("Our node failed to create a TX! Is your address invalid?");
-        await process.core.users.addBalance(msg.sender, amount);
+        await process.core.users.addBalance(msg.sender, BN(amount));
         return;
     }
 

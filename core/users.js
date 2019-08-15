@@ -13,6 +13,7 @@ var connection, table;
 
 //RAM cache of users.
 var users;
+var admins;
 
 //Array of every handled TX hash.
 var handled;

@@ -100,7 +100,7 @@ async function getTransactions(address) {
 
 async function getTokenBalance(walletAddress) {
     // Call balanceOf function
-    contract.balanceOf(walletAddress, (error, balance) => {
+    contract.methods.balanceOf(walletAddress, (error, balance) => {
         // Get decimals
         contract.decimals((error, decimals) => {
             // calculate a balance
