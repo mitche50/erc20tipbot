@@ -23,6 +23,10 @@ To install the bot:
         - `decimals` set to the amount of the coin's decimals (18).
         - `withdrawFee` set to the amount of the coin to charge every withdraw.
         - `infura` set to the WebSocket URL of the Infura Project the bot is run through.
+        - NOTE: if you want to use a geth light node instead of infura:
+            - Update geth-light.service replacing `user` with your user and `/path/to` with the path to the erc20tipbot folder.
+            - Move to the service folder `mv geth-light.service /etc/systemd/system/geth-light.service`
+            - Start the service: `systemctl start geth-light`
         - `keys` set to the directory used for keystore files. Every keystore in this directory must be encrypted with a blank password, and the bot will work with every keystore.
     - Edit the `settings.json` file's `coin.addresses` object to have:
         - `wallet` set to the address which will host all the Ether used to fund TXs. This must be an address in a keystore file already in the keys directory.

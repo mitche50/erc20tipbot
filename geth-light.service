@@ -1,0 +1,12 @@
+[Unit]
+Description=geth light node with websockets
+After=network.target
+
+[Service]
+User=user
+Restart=on-failure
+ExecStart=/path/to/erc20tipbot/geth-light-service
+
+[Install]
+WantedBy=multi-user.target
+

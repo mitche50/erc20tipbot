@@ -8,6 +8,8 @@ BN.config({
 var symbol = process.settings.coin.symbol;
 
 module.exports = async (msg) => {
+    //Only enable this for DM messages
+    if (message.channel.type != "dm") return;
     //Check the argument count.
     if (msg.text.length !== 3) {
         msg.obj.reply("You used the wrong amount of arguments.");
@@ -23,6 +25,9 @@ module.exports = async (msg) => {
     if (amount === "all") {
         //The amount with the fee is the user's balance.
         amountWFee = await process.core.users.getBalance(msg.sender);
+        if (amount > amountWFee) {
+            msg.obj.reply("Your balance is less than the fee.  Either add more " + symbol + " or wait until you get more tips to withdraw all.");
+        }
         //The amount is the balance minus the fee.
         amount = amountWFee.minus(BN(process.settings.coin.withdrawFee));        
     //Else...
