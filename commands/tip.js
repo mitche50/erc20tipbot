@@ -40,7 +40,7 @@ module.exports = async (msg) => {
             (to.substr(0, 2) !== "<@") ||
             (to.substr(to.length-1) !== ">") ||
             (Number.isNaN(parseInt(to.substring(2, to.length-1))))
-        ) && (Object.keys(pools).indexOf(to) === -1)
+        )
     ) {
         msg.obj.reply("You are not tipping to a valid person. Please put @ in front of their name and click the popup Discord provides.");
         return;
@@ -67,10 +67,10 @@ module.exports = async (msg) => {
     await process.core.users.create(to);
     //Add the amount to the target.
     await process.core.users.addBalance(to, amount);
-    msg.obj.reply("Sent " + amount + " " + symbol + " to " + (Number.isNaN(parseInt(to)) ? pools[to].printName : "<@" + to + ">") + (pool ? " via the " + pools[from].printName + " pool" : "") + ".");
-    if (pool) {
-        for (var i in pools[from].admins) {
-            process.client.users.get(pools[from].admins[i]).send(pools[from].printName + " pool update: <@" + msg.sender + "> sent " + amount + " " + symbol + " to <@" + to + ">.");
-        }
-    }
+    msg.obj.react('\:white_check_mark:')
+        .then(() => msg.obj.react('\:regional_indicator_s:'))
+        .then(() => msg.obj.react('\:regional_indicator_e:'))
+        .then(() => msg.obj.react('\:regional_indicator_n:'))
+        .then(() => msg.obj.react('\:regional_indicator_t:'))
+        .catch(() => console.error('One of the emojis failed to react.'));
 };
