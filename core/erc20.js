@@ -120,8 +120,14 @@ module.exports = async () => {
     //Init Web3.
     web3 = new web3(process.settings.coin.infura);
     //Set listeners for errors / disconnects
-    web3.on('error', e => console.error('WS Error', e));
-    web3.on('end', e => console.error('WS End', e));
+    provider = web3.currentProvider;
+    provider.on('error', e => handleDisconnects(e));
+    provider.on('end', e => handleDisconnects(e));
+    //When disconnected, reconnect to the websocket.
+    function handleDisconnects(e) {
+        console.error('WS Error', e);
+        web3 = new web3(process.settings.coin.infura);
+    }
     //Create the Contract object.
     contract = new web3.eth.Contract(abi, process.settings.coin.addresses.contract);
     //Set the decimals and decimalsBN.
