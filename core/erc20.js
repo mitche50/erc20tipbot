@@ -102,6 +102,8 @@ async function getTokenBalance(walletAddress) {
     // Call balanceOf function
     balance = await contract.methods.balanceOf(walletAddress);
     decimals = await contract.methods.decimals();
+    console.log("balance: " + balance);
+    console.log("decimals: " + decimals);
     return balance.div(10**decimals);
 }
 
