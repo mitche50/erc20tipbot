@@ -34,7 +34,7 @@ module.exports = async (msg) => {
         amount = BN(BN(amount).toFixed(process.settings.coin.decimals));
     }
 
-    //If this is not a valid user, or a pool we're sending to...
+    //If this is not a valid user
     if (
         (
             (to.substr(0, 2) !== "<@") ||
