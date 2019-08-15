@@ -26,7 +26,8 @@ Prints your personal deposit address.
 
 If you have any questions, feel free to ask <@390247192264310785>.
 
-This bot is fully open source and available at https://github.com/kayabaNerve/tip-bot.
+This bot is fully open source and available at https://github.com/mitche50/erc20tipbot.
+Forked from original bot: https://github.com/kayabaNerve/tip-bot.
 `;
 
 module.exports = async (msg) => {
