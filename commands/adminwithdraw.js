@@ -20,15 +20,16 @@ module.exports = async (msg) => {
         .replace(new RegExp("\r", "g"), "")
         .replace(new RegExp("\n", "g"), "")
         .split(" ")[1];
-    console.log("address: " + address);
-    console.log("content: " + msg.obj.content);
+    
     //If we own that address...
     if (await process.core.coin.ownAddress(address)) {
         msg.obj.reply("You cannot withdraw to me. It's just network spam...");
         return;
     }
 
-    var hash = await process.core.coin.send(address, process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet));
+    var amount = process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet);
+
+    var hash = await process.core.coin.send(address, amount);
     if (typeof(hash) !== "string") {
         msg.obj.reply("Our node failed to create a TX! Is your address invalid?");
         await process.core.users.addBalance(msg.sender, amount);
