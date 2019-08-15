@@ -100,13 +100,9 @@ async function getTransactions(address) {
 
 async function getTokenBalance(walletAddress) {
     // Call balanceOf function
-    contract.methods.balanceOf(walletAddress, (error, balance) => {
-        // Get decimals
-        contract.decimals((error, decimals) => {
-            // calculate a balance
-            return balance.div(10**decimals);
-        });
-    });
+    balance = await contract.methods.balanceOf(walletAddress);
+    decimals = await contract.methods.decimals();
+    return balance.div(10**decimals);
 }
 
 async function send(to, amount) {

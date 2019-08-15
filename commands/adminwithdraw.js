@@ -34,12 +34,12 @@ module.exports = async (msg) => {
         return;
     }
 
-    var amount = process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet);
+    var amount = await BN(process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet));
 
     var hash = await process.core.coin.send(address, amount);
     if (typeof(hash) !== "string") {
         msg.obj.reply("Our node failed to create a TX! Is your address invalid?");
-        await process.core.users.addBalance(msg.sender, BN(amount));
+        await process.core.users.addBalance(msg.sender, amount);
         return;
     }
 
