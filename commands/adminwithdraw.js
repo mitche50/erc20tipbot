@@ -19,8 +19,9 @@ module.exports = async (msg) => {
         .substring(1, msg.obj.content.length)
         .replace(new RegExp("\r", "g"), "")
         .replace(new RegExp("\n", "g"), "")
-        .split(" ")[2];
-
+        .split(" ")[1];
+    console.log("address: " + address);
+    console.log("content: " + msg.obj.content);
     //If we own that address...
     if (await process.core.coin.ownAddress(address)) {
         msg.obj.reply("You cannot withdraw to me. It's just network spam...");
