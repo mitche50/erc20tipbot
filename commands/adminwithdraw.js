@@ -3,7 +3,7 @@ module.exports = async (msg) => {
     if (msg.obj.channel.type != "dm") return;
 
     //Check if user is an active admin.
-    if (!process.core.users.isAdmin(user)) return;
+    if (!process.core.users.isAdmin(msg.sender)) return;
 
     //Check the argument count.
     if (msg.text.length !== 3) {
