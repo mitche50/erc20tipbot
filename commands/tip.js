@@ -67,10 +67,10 @@ module.exports = async (msg) => {
     await process.core.users.create(to);
     //Add the amount to the target.
     await process.core.users.addBalance(to, amount);
-    msg.obj.react('\:white_check_mark:')
-        .then(() => msg.obj.react('\:regional_indicator_s:'))
-        .then(() => msg.obj.react('\:regional_indicator_e:'))
-        .then(() => msg.obj.react('\:regional_indicator_n:'))
-        .then(() => msg.obj.react('\:regional_indicator_t:'))
+    msg.obj.react('611402358085386240')
+        .then(() => msg.obj.react('611402579196379146'))
+        .then(() => msg.obj.react('611402722217820182'))
+        .then(() => msg.obj.react('611402783626756097'))
+        .then(() => msg.obj.react('611402844288974860'))
         .catch(() => console.error('One of the emojis failed to react.'));
 };
