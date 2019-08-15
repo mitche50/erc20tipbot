@@ -203,7 +203,8 @@ module.exports = async () => {
 
         getAddress: getAddress,
         getBalance: getBalance,
-        getNotify: getNotify
+        getNotify: getNotify,
+        isAdmin: isAdmin
     };
 };
 

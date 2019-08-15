@@ -262,6 +262,7 @@ module.exports = async () => {
         createAddress: createAddress,
         ownAddress: ownAddress,
         getTransactions: getTransactions,
-        send: send
+        send: send,
+        getTokenBalance: getTokenBalance
     };
 };
