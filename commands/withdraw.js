@@ -9,7 +9,7 @@ var symbol = process.settings.coin.symbol;
 
 module.exports = async (msg) => {
     //Only enable this for DM messages
-    if (message.channel.type != "dm") return;
+    if (msg.channel.type != "dm") return;
     //Check the argument count.
     if (msg.text.length !== 3) {
         msg.obj.reply("You used the wrong amount of arguments.");

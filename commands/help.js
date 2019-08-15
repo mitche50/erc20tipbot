@@ -32,7 +32,7 @@ Forked from original bot: https://github.com/kayabaNerve/tip-bot.
 
 module.exports = async (msg) => {
     //Only enable this for DM messages
-    if (message.channel.type != "dm") return;
+    if (msg.channel.type != "dm") return;
     msg.obj.author.send({
         embed: {
             description: help

@@ -131,7 +131,9 @@ module.exports = async () => {
     //Load every account.
     addresses = [];
     var filenames = fs.readdirSync(process.settings.coin.keys);
+    console.log("Adding addresses:")
     for (var file in filenames) {
+        console.log("addresss " + file + " processing");
         var wallet = ethjsWallet.fromV3(fs.readFileSync(process.settings.coin.keys + filenames[file]).toString(), "", true);
         //If this isn't the master address, add it to the address array.
         var address = wallet.getChecksumAddressString().toString().toLowerCase();
@@ -141,6 +143,7 @@ module.exports = async () => {
         //Add it to Web3.
         web3.eth.accounts.wallet.add("0x" + wallet.getPrivateKey().toString("hex"));
     }
+    console.log("Addresses processed.");
 
     //Init the TXs cache.
     txs = {};
