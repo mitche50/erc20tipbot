@@ -6,7 +6,7 @@ module.exports = async (msg) => {
     if (!process.core.users.isAdmin(msg.sender)) return;
 
     //Check the argument count.
-    if (msg.text.length !== 3) {
+    if (msg.text.length !== 2) {
         msg.obj.reply("You used the wrong amount of arguments.");
         return;
     }
