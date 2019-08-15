@@ -57,13 +57,14 @@ async function create(user) {
 async function setAddress(user, address) {
     //If they already have an addrwss, return.
     if (typeof(users[user].address) === "string") {
-        return;
+        return "invalid";
     }
 
     //Update the table with the address.
     await connection.query("UPDATE " + table + " SET address = ? WHERE name = ?", [address, user]);
     //Update the RAM cache.
     users[user].address = address;
+    return address;
 }
 
 //Adds to an user's balance.
