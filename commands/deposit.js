@@ -1,6 +1,6 @@
 module.exports = async (msg) => {
     //Only enable this for DM messages
-    if (msg.channel.type != "dm") return;
+    if (msg.obj.channel.type != "dm") return;
     if (!(await process.core.users.getAddress(msg.sender))) {
         await process.core.users.setAddress(msg.sender, await process.core.coin.createAddress(msg.sender));
     }

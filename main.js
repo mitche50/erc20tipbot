@@ -8,9 +8,6 @@ var commands;
 async function parseMsg(msg) {
     //If the command exists, hand it off.
     if (typeof(commands[msg.text[0]]) !== "undefined") {
-        console.log("msg.text: " + msg.text);
-        console.log("msg.channel: " + msg.obj.channel);
-        console.log("msg.channel.type: " + msg.obj.channel.type);
         await commands[msg.text[0]](msg);
         return;
     }

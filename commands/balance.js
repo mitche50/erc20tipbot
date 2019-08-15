@@ -2,7 +2,7 @@ var pools = process.settings.pools;
 
 module.exports = async (msg) => {
     //Only enable this for DM messages
-    if (msg.channel.type != "dm") return;
+    if (msg.obj.channel.type != "dm") return;
     //If an argument was provided...
     if (msg.text[1]) {
         var pool = msg.text[1];
