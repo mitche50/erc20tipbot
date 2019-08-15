@@ -183,10 +183,8 @@ module.exports = async () => {
 
     //Set admin list.
     rows = await connection.query("SELECT * FROM " + adminTbl);
-    console.log("row return: " + rows);
     for (i in rows) {
-        console.log("adding admin: " + rows[i].name + " with status: " + rows[i].active)
-        admins[rows[i].name] = {active: rows[i].active};
+        admins[rows[i].admin_id] = {active: rows[i].active};
     }
 
     //Make sure all the pools have accounts.

@@ -8,7 +8,6 @@ BN.config({
 module.exports = async (msg) => {
     //Only enable this for DM messages
     if (msg.obj.channel.type != "dm") return;
-    console.log("Checking admin for sender: " + msg.sender);
 
     //Check if user is an active admin.
     if (!await process.core.users.isAdmin(msg.sender)) return;
