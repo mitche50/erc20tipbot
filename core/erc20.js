@@ -119,6 +119,9 @@ async function send(to, amount) {
 module.exports = async () => {
     //Init Web3.
     web3 = new web3(process.settings.coin.infura);
+    //Set listeners for errors / disconnects
+    web3.on('error', e => console.error('WS Error', e));
+    web3.on('end', e => console.error('WS End', e));
     //Create the Contract object.
     contract = new web3.eth.Contract(abi, process.settings.coin.addresses.contract);
     //Set the decimals and decimalsBN.
@@ -185,7 +188,12 @@ module.exports = async () => {
         if (!(receipt.status)) {
             /*eslint no-console: ["error", {allow: ["error"]}]*/
             console.error("Failed to forward the funds.");
-            return;
+            return;function ping(timeout){
+                setTimeout(()=>{
+                    ws.ping('Heartbeat');
+                    ping(timeout)
+                },timeout)
+            }
         }
 
         //Verify that worked.
