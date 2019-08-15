@@ -117,6 +117,12 @@ async function setNotified(user) {
     users[user].notify = false;
 }
 
+//Returns if the user is admin or not.
+async function isAdmin(user) {
+    if (admins[user].active === 1) return true;
+    return false;
+}
+
 //Returns an user's address.
 async function getAddress(user) {
     return users[user].address;
@@ -142,12 +148,14 @@ module.exports = async () => {
     });
     //Set the table from the settings.
     table = process.settings.mysql.tips;
+    admin = process.settings.mysql.admins;
 
     //Init the RAM cache.
     users = {};
+    admins = {};
     //Init the handled array.
     handled = [];
-    //Gets every row in the table.
+    //Gets every row in the tips table.
     var rows = await connection.query("SELECT * FROM " + table);
     //Iterate over each row, creating an user object for each.
     var i;
@@ -169,6 +177,12 @@ module.exports = async () => {
         for (x in txs) {
             handled.push(txs[x].txid);
         }
+    }
+
+    //Set admin list.
+    rows = await connection.query("SELECT * FROM " + admin);
+    for (i in rows) {
+        admins[rows[i].name] = {active: rows[i].active};
     }
 
     //Make sure all the pools have accounts.

@@ -21,6 +21,7 @@
     "mysql": {
         "db": "tipbot",
         "tips": "tips",
+        "admins": "admins",
         "user": "root",
         "pass": "pass"
     },

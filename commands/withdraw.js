@@ -25,8 +25,9 @@ module.exports = async (msg) => {
     if (amount === "all") {
         //The amount with the fee is the user's balance.
         amountWFee = await process.core.users.getBalance(msg.sender);
-        if (amount > amountWFee) {
+        if (process.settings.coin.withdrawFee > amountWFee) {
             msg.obj.reply("Your balance is less than the fee.  Either add more " + symbol + " or wait until you get more tips to withdraw all.");
+            return;
         }
         //The amount is the balance minus the fee.
         amount = amountWFee.minus(BN(process.settings.coin.withdrawFee));        

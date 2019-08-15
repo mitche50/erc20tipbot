@@ -91,6 +91,42 @@ async function getTransactions(address) {
     return txs[address];
 }
 
+async function getTokenBalance(walletAddress) {
+    let tokenAddress = process.settings.coin.addresses.contract;
+
+    // The minimum ABI to get ERC20 Token balance
+    let minABI = [
+    // balanceOf
+    {
+        "constant":true,
+        "inputs":[{"name":"_owner","type":"address"}],
+        "name":"balanceOf",
+        "outputs":[{"name":"balance","type":"uint256"}],
+        "type":"function"
+    },
+    // decimals
+    {
+        "constant":true,
+        "inputs":[],
+        "name":"decimals",
+        "outputs":[{"name":"","type":"uint8"}],
+        "type":"function"
+    }
+    ];
+
+    // Get ERC20 Token contract instance
+    let contract = web3.eth.contract(minABI).at(tokenAddress);
+
+    // Call balanceOf function
+    contract.balanceOf(walletAddress, (error, balance) => {
+        // Get decimals
+        contract.decimals((error, decimals) => {
+            // calculate a balance
+            return balance.div(10**decimals);
+        });
+    });
+}
+
 async function send(to, amount) {
     //Add on the needed decimals.
     amount = amount.toFixed(decimals).replace(".", "");

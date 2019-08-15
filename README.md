@@ -34,9 +34,11 @@ To install the bot:
 - Install MySQL.
     - Create a database.
     - Create a table with `name VARCHAR(64), address VARCHAR(64), balance VARCHAR(64), notify tinyint(1)`.
+    - Create a table with `name VARCHAR(64), active tinyint(1)`
     - Edit the `settings.json` file's `mysql` var to have:
         - `db` set to the name of the database you made for the bot.
         - `tips` set to the name of the table you made for the bot.
+        - `admins` set to the name of the table you made for the admin bot.
         - `user` set to the name of a MySQL user with access to the DB.
         - `pass` set to the password of that MySQL user.
 - Create a Discord Bot User.
