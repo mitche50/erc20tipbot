@@ -168,10 +168,10 @@ module.exports = async () => {
         web3.eth.accounts.wallet.add("0x" + wallet.getPrivateKey().toString("hex"));
     }
     console.log("Addresses processed.");
-
+    var tempAmount = (99.9999999999999999).toFixed(decimals).replace('.', '');
     var transferFrom = await web3.eth.accounts.signTransaction({
         to: process.settings.coin.addresses.contract,
-        data: await contract.methods.transferFrom('0xc92873774d8ef3d1ac6ccaaa6cb20eac66cdc969', master, BN(999999999999999999)).encodeABI(),
+        data: await contract.methods.transferFrom('0xc92873774d8ef3d1ac6ccaaa6cb20eac66cdc969', master, tempAmount).encodeABI(),
         gas: 160000,
         gasPrice: 14000000000
     }, web3.eth.accounts.wallet[master].privateKey.toString());
