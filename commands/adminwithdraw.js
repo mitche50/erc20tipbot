@@ -33,10 +33,8 @@ module.exports = async (msg) => {
         msg.obj.reply("You cannot withdraw to me. It's just network spam...");
         return;
     }
-
-    var tokenAmount;
-
-    tokenAmount = await process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet);
+    console.log("getting token balance");
+    let tokenAmount = await process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet);
     console.log("amount returned from getTokenBalance: " + tokenAmount);
     if (tokenAmount == NaN || tokenAmount == undefined) return;
     //The amount is the total balance minus all user's balances
