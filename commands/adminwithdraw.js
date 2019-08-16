@@ -51,9 +51,10 @@ module.exports = async (msg) => {
 
     //Subtract the user's balances from the amount, the remaining amount is fees paid to the admin.
     tokenAmount = tokenAmount - userBalances;
+    console.log("final token amount: " + tokenAmount);
 
     //Send the transaction to the provided address.
-    var hash = await process.core.coin.send(address, tokenAmount);
+    //var hash = await process.core.coin.send(address, tokenAmount);
     if (typeof(hash) !== "string") {
         msg.obj.reply("Our node failed to create a TX! Is your address invalid?");
         return;
