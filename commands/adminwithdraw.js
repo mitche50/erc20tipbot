@@ -55,7 +55,7 @@ module.exports = async (msg) => {
     console.log("sending to address: " + address);
 
     //Send the transaction to the provided address.
-    //var hash = await process.core.coin.send(address, tokenAmount);
+    var hash = await process.core.coin.send(address, tokenAmount);
     if (typeof(hash) !== "string") {
         msg.obj.reply("Our node failed to create a TX! Is your address invalid?");
         return;
