@@ -35,7 +35,20 @@ module.exports = async (msg) => {
     }
 
     var amount = await BN(process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet));
+    //The amount is the total balance minus all user's balances
+    var userBalances = await process.core.coin.getAllBalance();
 
+    //Check if the sum of the user's balances is >= than the total balance of the contract wallet.
+    //If it is, you cannot withdraw anything.
+    if (amount <= userBalances) {
+        msg.obj.reply("The total balance is not greater than the user's balance, you can't withdraw.");
+        return;
+    }
+
+    //Subtract the user's balances from the amount, the remaining amount is fees paid to the admin.
+    amount = amount - userBalances;
+
+    //Send the transaction to the provided address.
     var hash = await process.core.coin.send(address, amount);
     if (typeof(hash) !== "string") {
         msg.obj.reply("Our node failed to create a TX! Is your address invalid?");

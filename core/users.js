@@ -87,6 +87,14 @@ async function addBalance(user, amount) {
     return true;
 }
 
+//Return the balance for all users
+async function getAllBalance() {
+    table = process.settings.mysql.tips;
+    rows = await connection.query("SELECT sum(balance) FROM " + table);
+
+    return BN(rows[0]);
+}
+
 //Subtracts from an user's balance.
 async function subtractBalance(user, amount) {
     //Return false if the amount is invalid.
@@ -204,6 +212,7 @@ module.exports = async () => {
 
         getAddress: getAddress,
         getBalance: getBalance,
+        getAllBalance: getAllBalance,
         getNotify: getNotify,
         isAdmin: isAdmin
     };
