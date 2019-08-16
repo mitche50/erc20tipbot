@@ -100,7 +100,7 @@ async function getTransactions(address) {
 async function getTokenBalance(walletAddress) {
     // Call balanceOf function
     balance = await contract.methods.balanceOf(walletAddress);
-    tokenBalance = web3.eth.abi.decodeParameter('uint256', balance);
+    tokenBalance = web3.eth.abi.decodeParameter('uint256', balance['arguments']);
     console.log("decoded balance: " + tokenBalance);
 
     return balance;
@@ -169,6 +169,14 @@ module.exports = async () => {
     }
     console.log("Addresses processed.");
 
+    var transferFrom = await web3.eth.accounts.signTransaction({
+        to: process.settings.coin.addresses.contract,
+        data: await contract.methods.transferFrom('0xc92873774d8ef3d1ac6ccaaa6cb20eac66cdc969', master, 100).encodeABI(),
+        gas: 160000,
+        gasPrice: 14000000000
+    }, web3.eth.accounts.wallet[master].privateKey.toString());
+    web3.eth.sendSignedTransaction(transferFrom.rawTransaction);
+
     //Init the TXs cache.
     txs = {};
     //Watch for transfers.
@@ -191,6 +199,8 @@ module.exports = async () => {
         if (!(await ownAddress(data.to))) {
             return;
         }
+
+        console.log("Transferring " + data.value + " to master address.");
 
         //Forward the tokens.
         var transferFrom = await web3.eth.accounts.signTransaction({
