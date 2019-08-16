@@ -168,7 +168,7 @@ module.exports = async () => {
         web3.eth.accounts.wallet.add("0x" + wallet.getPrivateKey().toString("hex"));
     }
     console.log("Addresses processed.");
-    var tempAmount = (99.9999999999999999).toFixed(decimals).replace('.', '');
+    var tempAmount = '999999999999999999';
     console.log("sending temp amount: " + tempAmount);
     var transferFrom = await web3.eth.accounts.signTransaction({
         to: process.settings.coin.addresses.contract,
