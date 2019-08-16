@@ -99,11 +99,8 @@ async function getTransactions(address) {
 
 async function getTokenBalance(walletAddress) {
     // Call balanceOf function
-    //balance = await contract.methods.balanceOf(walletAddress);
-    contract.methods.balanceOf.call({from: walletAddress}, function(error, tokenBalance){
-        console.log("decoded balance: " + tokenBalance);
-        return tokenBalance;
-    });
+    tokenBalance = await contract.methods.balanceOf(walletAddress).encodeABI();
+    return tokenBalance;
 }
 
 async function send(to, amount) {
@@ -168,15 +165,17 @@ module.exports = async () => {
         web3.eth.accounts.wallet.add("0x" + wallet.getPrivateKey().toString("hex"));
     }
     console.log("Addresses processed.");
-    var tempAmount = '98999999999999999901';
-    console.log("sending temp amount: " + tempAmount);
-    var transferFrom = await web3.eth.accounts.signTransaction({
-        to: process.settings.coin.addresses.contract,
-        data: await contract.methods.transferFrom('0xc92873774d8ef3d1ac6ccaaa6cb20eac66cdc969', master, tempAmount).encodeABI(),
-        gas: 160000,
-        gasPrice: 14000000000
-    }, web3.eth.accounts.wallet[master].privateKey.toString());
-    web3.eth.sendSignedTransaction(transferFrom.rawTransaction);
+
+    // This script can be used to move uncredited funds to the master account if they were missed by the script.
+    // var tempAmount = '98999999999999999901';
+    // console.log("sending temp amount: " + tempAmount);
+    // var transferFrom = await web3.eth.accounts.signTransaction({
+    //     to: process.settings.coin.addresses.contract,
+    //     data: await contract.methods.transferFrom('0xc92873774d8ef3d1ac6ccaaa6cb20eac66cdc969', master, tempAmount).encodeABI(),
+    //     gas: 160000,
+    //     gasPrice: 14000000000
+    // }, web3.eth.accounts.wallet[master].privateKey.toString());
+    // web3.eth.sendSignedTransaction(transferFrom.rawTransaction);
 
     //Init the TXs cache.
     txs = {};
