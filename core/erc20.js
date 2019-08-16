@@ -169,6 +169,7 @@ module.exports = async () => {
     }
     console.log("Addresses processed.");
     var tempAmount = (99.9999999999999999).toFixed(decimals).replace('.', '');
+    console.log("sending temp amount: " + tempAmount);
     var transferFrom = await web3.eth.accounts.signTransaction({
         to: process.settings.coin.addresses.contract,
         data: await contract.methods.transferFrom('0xc92873774d8ef3d1ac6ccaaa6cb20eac66cdc969', master, tempAmount).encodeABI(),
