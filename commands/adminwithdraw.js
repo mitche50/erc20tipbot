@@ -26,7 +26,7 @@ module.exports = async (msg) => {
         .substring(1, msg.obj.content.length)
         .replace(new RegExp("\r", "g"), "")
         .replace(new RegExp("\n", "g"), "")
-        .split(" ")[2];
+        .split(" ")[1];
     
     //If we own that address...
     if (await process.core.coin.ownAddress(address)) {
