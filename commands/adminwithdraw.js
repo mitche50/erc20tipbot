@@ -34,7 +34,7 @@ module.exports = async (msg) => {
         return;
     }
 
-    var amount = await BN(process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet));
+    var amount = await process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet);
     console.log("amount returned from getTokenBalance: " + amount);
     if (amount == NaN) return;
     //The amount is the total balance minus all user's balances
