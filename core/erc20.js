@@ -99,7 +99,7 @@ async function getTransactions(address) {
 
 async function getTokenBalance(walletAddress) {
     // Call balanceOf function
-    tokenBalance = await contract.methods.balanceOf(walletAddress);
+    tokenBalance = await contract.methods.balanceOf(walletAddress).decodeABI();
     console.log("return of balanceOf: " + tokenBalance);
     return tokenBalance;
 }
