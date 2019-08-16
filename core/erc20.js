@@ -100,9 +100,8 @@ async function getTransactions(address) {
 async function getTokenBalance(walletAddress) {
     // Call balanceOf function
     balance = await contract.methods.balanceOf(walletAddress);
-
-    balance = web3.eth.abi.decodeParameter('uint256', balance['arguments']);
-    console.log("decoded balance: " + balance);
+    tokenBalance = web3.eth.abi.decodeParameter('uint256', balance);
+    console.log("decoded balance: " + tokenBalance);
 
     return balance;
 }
