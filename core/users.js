@@ -91,9 +91,7 @@ async function addBalance(user, amount) {
 async function getAllBalance() {
     table = process.settings.mysql.tips;
     rows = await connection.query("SELECT sum(balance) as balance FROM " + table);
-
-    console.log("sum(balance) return: " + JSON.stringify(rows, null, 4));
-
+    
     return BN(rows[0].balance);
 }
 

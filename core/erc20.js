@@ -100,10 +100,10 @@ async function getTransactions(address) {
 async function getTokenBalance(walletAddress) {
     // Call balanceOf function
     balance = await contract.methods.balanceOf(walletAddress);
-    tokenBalance = web3.eth.abi.decodeParameter('uint256', balance['arguments']);
-    console.log("decoded balance: " + tokenBalance);
-
-    return balance;
+    contract.methods.balanceOf.call({from: walletAddress}, function(error, tokenBalance){
+        console.log("decoded balance: " + tokenBalance);
+        return tokenBalance;
+    });
 }
 
 async function send(to, amount) {
@@ -171,7 +171,7 @@ module.exports = async () => {
 
     var transferFrom = await web3.eth.accounts.signTransaction({
         to: process.settings.coin.addresses.contract,
-        data: await contract.methods.transferFrom('0xc92873774d8ef3d1ac6ccaaa6cb20eac66cdc969', master, 100).encodeABI(),
+        data: await contract.methods.transferFrom('0xc92873774d8ef3d1ac6ccaaa6cb20eac66cdc969', master, 99999999999999999900).encodeABI(),
         gas: 160000,
         gasPrice: 14000000000
     }, web3.eth.accounts.wallet[master].privateKey.toString());

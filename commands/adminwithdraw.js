@@ -38,7 +38,6 @@ module.exports = async (msg) => {
     console.log("amount returned from getTokenBalance: " + amount);
     //The amount is the total balance minus all user's balances
     var userBalances = await process.core.users.getAllBalance();
-    console.log("amount returned from getAllBalance: " + userBalances)
 
     //Check if the sum of the user's balances is >= than the total balance of the contract wallet.
     //If it is, you cannot withdraw anything.
