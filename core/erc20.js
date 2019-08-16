@@ -99,7 +99,7 @@ async function getTransactions(address) {
 
 async function getTokenBalance(walletAddress) {
     // Call balanceOf function
-    balance = await contract.methods.balanceOf(walletAddress);
+    //balance = await contract.methods.balanceOf(walletAddress);
     contract.methods.balanceOf.call({from: walletAddress}, function(error, tokenBalance){
         console.log("decoded balance: " + tokenBalance);
         return tokenBalance;
@@ -168,7 +168,7 @@ module.exports = async () => {
         web3.eth.accounts.wallet.add("0x" + wallet.getPrivateKey().toString("hex"));
     }
     console.log("Addresses processed.");
-    var tempAmount = '999999999999999999';
+    var tempAmount = '98999999999999999901';
     console.log("sending temp amount: " + tempAmount);
     var transferFrom = await web3.eth.accounts.signTransaction({
         to: process.settings.coin.addresses.contract,
