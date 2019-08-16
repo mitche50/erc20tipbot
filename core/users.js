@@ -191,7 +191,9 @@ module.exports = async () => {
 
     //Set admin list.
     rows = await connection.query("SELECT * FROM " + adminTbl);
+    console.log("admin table return: " + JSON.stringify(rows, null, 4))
     for (i in rows) {
+        console.log("processing admin: " + rows[i].admin_id);
         admins[rows[i].admin_id] = {active: rows[i].active};
     }
 

@@ -36,7 +36,7 @@ module.exports = async (msg) => {
 
     var amount = await BN(process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet));
     //The amount is the total balance minus all user's balances
-    var userBalances = await process.core.coin.getAllBalance();
+    var userBalances = await process.core.users.getAllBalance();
 
     //Check if the sum of the user's balances is >= than the total balance of the contract wallet.
     //If it is, you cannot withdraw anything.
