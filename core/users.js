@@ -90,9 +90,11 @@ async function addBalance(user, amount) {
 //Return the balance for all users
 async function getAllBalance() {
     table = process.settings.mysql.tips;
-    rows = await connection.query("SELECT sum(balance) FROM " + table);
+    rows = await connection.query("SELECT sum(balance) as balance FROM " + table);
 
-    return BN(rows[0]);
+    console.log("sum(balance) return: " + JSON.stringify(rows, null, 4));
+
+    return BN(rows[0].balance);
 }
 
 //Subtracts from an user's balance.
@@ -191,9 +193,7 @@ module.exports = async () => {
 
     //Set admin list.
     rows = await connection.query("SELECT * FROM " + adminTbl);
-    console.log("admin table return: " + JSON.stringify(rows, null, 4))
     for (i in rows) {
-        console.log("processing admin: " + rows[i].admin_id);
         admins[rows[i].admin_id] = {active: rows[i].active};
     }
 
