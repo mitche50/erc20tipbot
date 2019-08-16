@@ -100,7 +100,6 @@ async function getTransactions(address) {
 async function getTokenBalance(walletAddress) {
     // Call balanceOf function
     await contract.methods.balanceOf(walletAddress).call().then(function (result) {
-        console.log("return of balanceOf: " +result);
         return result;
     });
 }
