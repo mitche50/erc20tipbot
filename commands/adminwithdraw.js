@@ -51,6 +51,7 @@ module.exports = async (msg) => {
 
     //Subtract the user's balances from the amount, the remaining amount is fees paid to the admin.
     tokenAmount = tokenAmount - userBalances;
+    tokenAmount = BN(BN(tokenAmount).toFixed(process.settings.coin.decimals));
     console.log("final token amount: " + tokenAmount);
     console.log("sending to address: " + address);
 
