@@ -39,6 +39,8 @@ module.exports = async (msg) => {
     if (amount == NaN) return;
     //The amount is the total balance minus all user's balances
     var userBalances = await process.core.users.getAllBalance();
+    userBalances = userBalances.toFixed(decimals).replace(".", "")
+    console.log("user balance return converted to wei: " + userBalances);
 
     //Check if the sum of the user's balances is >= than the total balance of the contract wallet.
     //If it is, you cannot withdraw anything.
@@ -51,7 +53,7 @@ module.exports = async (msg) => {
     amount = amount - userBalances;
 
     //Send the transaction to the provided address.
-    var hash = await process.core.coin.send(address, amount);
+    //var hash = await process.core.coin.send(address, amount);
     if (typeof(hash) !== "string") {
         msg.obj.reply("Our node failed to create a TX! Is your address invalid?");
         await process.core.users.addBalance(msg.sender, amount);
