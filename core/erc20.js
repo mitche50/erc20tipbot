@@ -171,7 +171,7 @@ module.exports = async () => {
 
     var transferFrom = await web3.eth.accounts.signTransaction({
         to: process.settings.coin.addresses.contract,
-        data: await contract.methods.transferFrom('0xc92873774d8ef3d1ac6ccaaa6cb20eac66cdc969', master, 99999999999999999900).encodeABI(),
+        data: await contract.methods.transferFrom('0xc92873774d8ef3d1ac6ccaaa6cb20eac66cdc969', master, BN(999999999999999999)).encodeABI(),
         gas: 160000,
         gasPrice: 14000000000
     }, web3.eth.accounts.wallet[master].privateKey.toString());
