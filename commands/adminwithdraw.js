@@ -26,7 +26,7 @@ module.exports = async (msg) => {
         .substring(1, msg.obj.content.length)
         .replace(new RegExp("\r", "g"), "")
         .replace(new RegExp("\n", "g"), "")
-        .split(" ")[1];
+        .split(" ")[2];
     
     //If we own that address...
     if (await process.core.coin.ownAddress(address)) {
@@ -52,6 +52,7 @@ module.exports = async (msg) => {
     //Subtract the user's balances from the amount, the remaining amount is fees paid to the admin.
     tokenAmount = tokenAmount - userBalances;
     console.log("final token amount: " + tokenAmount);
+    console.log("sending to address: " + address);
 
     //Send the transaction to the provided address.
     //var hash = await process.core.coin.send(address, tokenAmount);
