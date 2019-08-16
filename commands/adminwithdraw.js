@@ -34,12 +34,12 @@ module.exports = async (msg) => {
         return;
     }
 
-    var amount = await process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet);
-    console.log("amount returned from getTokenBalance: " + amount);
-    if (amount == NaN) return;
+    var tokenAmount = await process.core.coin.getTokenBalance(process.settings.coin.addresses.wallet);
+    console.log("amount returned from getTokenBalance: " + tokenAmount);
+    if (tokenAmount == NaN || tokenAmount == undefined) return;
     //The amount is the total balance minus all user's balances
     var userBalances = await process.core.users.getAllBalance();
-    userBalances = userBalances.toFixed(decimals).replace(".", "")
+    userBalances = userBalances.toFixed(process.settings.coin.decimals).replace(".", "")
     console.log("user balance return converted to wei: " + userBalances);
 
     //Check if the sum of the user's balances is >= than the total balance of the contract wallet.
