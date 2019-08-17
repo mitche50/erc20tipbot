@@ -67,6 +67,14 @@ module.exports = async (msg) => {
     await process.core.users.create(to);
     //Add the amount to the target.
     await process.core.users.addBalance(to, amount);
+
+    //Notify the receiver they got a tip
+    let receiver = process.client.fetchUser(to);
+    receiver.send('You just received a ' + amount + ' ' + symbol + ' tip from <@' + from + '>!');
+
+    //TODO: Allow users to opt out of DMs.
+    
+    //React to the message to let the user know it was processed.
     msg.obj.react('✅')
         .then(() => msg.obj.react('🇸'))
         .then(() => msg.obj.react('🇪'))
