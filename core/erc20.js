@@ -11,7 +11,7 @@ var BN = require("bignumber.js");
 var ethjsWallet = require("ethereumjs-wallet");
 
 //Web3 lib.
-var web3 = require("web3");
+var web3c = require("web3");
 //ERC20 ABI.
 var abi = [
     {"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"type":"function"},
@@ -130,7 +130,7 @@ async function send(to, amount) {
 
 module.exports = async () => {
     //Init Web3.
-    web3 = new web3(process.settings.coin.infura);
+    web3 = new web3c(process.settings.coin.infura);
     //Set listeners for errors / disconnects
     provider = web3.currentProvider;
     provider.on('error', e => handleDisconnects(e));
@@ -138,7 +138,7 @@ module.exports = async () => {
     //When disconnected, reconnect to the websocket.
     function handleDisconnects(e) {
         console.error('WS Error', e);
-        web3 = new web3(process.settings.coin.infura);
+        web3 = new web3c(process.settings.coin.infura);
     }
     //Create the Contract object.
     contract = new web3.eth.Contract(abi, process.settings.coin.addresses.contract);
