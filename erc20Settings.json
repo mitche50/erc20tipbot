@@ -10,6 +10,7 @@
         "symbol": "ERC",
         "decimals": 18,
         "withdrawFee": 1,
+        "mintip": 0.01,
         "infura": "wss://mainnet.infura.io/ws/v3/ID",
         "keys": "/home/tipbot/.ethereum/keystore/",
         "addresses": {

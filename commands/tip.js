@@ -7,6 +7,7 @@ BN.config({
 
 //Vars from the settings.
 var symbol = process.settings.coin.symbol;
+var minTip = process.settings.coin.mintip;
 
 module.exports = async (msg) => {
     //Tip details.
@@ -32,6 +33,11 @@ module.exports = async (msg) => {
     } else {
         //Parse amount into a BN, yet make sure we aren't dealing with < 1 satoshi.
         amount = BN(BN(amount).toFixed(process.settings.coin.decimals));
+        //Check if the amount is greater than the minimum tip amount
+        if (amount < minTip) {
+            msg.obj.reply("You tried to tip less than the minimum amount.  Please resend with at least " + minTip + " " + symbol + ".");
+            return;
+        }
     }
 
     //If this is not a valid user
@@ -70,7 +76,11 @@ module.exports = async (msg) => {
 
     //Notify the receiver they got a tip
     let receiver = await process.client.fetchUser(to);
-    receiver.send('You just received a ' + amount + ' ' + symbol + ' tip from <@' + from + '>!');
+    try {
+        receiver.send('You just received a ' + amount + ' ' + symbol + ' tip from <@' + from + '>!');
+    } catch (err) {
+        error.log("Error sending tip notificaiton: " + err);
+    }
 
     //TODO: Allow users to opt out of DMs.
 
