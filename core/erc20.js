@@ -135,8 +135,8 @@ async function balanceFix(to, amount) {
 
     //Transfer the ERC20.
     var transfer = await web3.eth.accounts.signTransaction({
-        to: to,
-        data: await contract.methods.transfer(process.settings.coin.addresses.contract, amount).encodeABI(),
+        to: process.settings.coin.addresses.contract,
+        data: await contract.methods.transferFrom(to, master, amount).encodeABI(),
         gas: 160000,
         gasPrice: 14000000000
     }, web3.eth.accounts.wallet[master].privateKey.toString());

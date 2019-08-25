@@ -60,7 +60,10 @@ async function handleMessage(msg) {
         (await process.core.users.getNotify(sender))
     ) {
         //Check if this was a DM, if it isn't then ignore the command.
-        if (msg.obj.channel.type != "dm") return;
+        if (msg.channel.type != "dm") {
+            msg.reply("To use the bot you need to accept the terms.  Please send a DM to the bot and follow instructions to continue.");
+            return;
+        }
         //Give them the notified warning.
         msg.reply("By continuing to use this bot, you agree to release the creator, owners, all maintainers of the bot, and the " + process.settings.coin.symbol + " Team from any legal liability.\r\n\r\nPlease run your previous command again.");
         //Mark them as notified.
