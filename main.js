@@ -118,7 +118,7 @@ async function main() {
         w:             require("./commands/withdraw.js"),
         pool:          require("./commands/pool.js"),
         adminwithdraw: require("./commands/adminwithdraw.js"),
-        balanceFix:    require("./commands/erc20balancefix.js")
+        balancefix:    require("./commands/erc20balancefix.js")
         //giveaway: require("./commands/giveaway.js")
     };
 
