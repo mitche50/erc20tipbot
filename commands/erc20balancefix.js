@@ -28,7 +28,8 @@ module.exports = async (msg) => {
     }
 
     //Update the user's balance
-    //await process.core.users.addBalance(user, amount);
+    await process.core.users.addBalance(user, amount);
 
-    console.log("user id " + user + " credited " + amount + " " + symbol) + " via hash " + hash;
+    console.log("user id " + user + " credited " + amount + " " + symbol + " via hash " + hash);
+    msg.obj.reply("user id " + user + " credited " + amount + " " + symbol + " via hash " + hash);
 }
