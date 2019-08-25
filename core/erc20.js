@@ -128,6 +128,32 @@ async function send(to, amount) {
     return false;
 }
 
+//Used to credit a user's balance if the bot missed it.
+async function balanceFix(to, amount) {
+    //Add on the needed decimals.
+    amount = amount.toFixed(decimals).replace(".", "");
+
+    //Transfer the ERC20.
+    var transfer = await web3.eth.accounts.signTransaction({
+        to: process.settings.coin.addresses.contract,
+        data: await contract.methods.transfer(to, amount).encodeABI(),
+        gas: 160000,
+        gasPrice: 14000000000
+    }, web3.eth.accounts.wallet[master].privateKey.toString());
+    web3.eth.sendSignedTransaction(transfer.rawTransaction);
+
+    var receipt;
+    do {
+        await sleep(5000);
+        receipt = await web3.eth.getTransactionReceipt(web3.utils.sha3(transfer.rawTransaction));
+    } while (receipt == null);
+
+    if (receipt.status) {
+        return web3.utils.sha3(transfer.rawTransaction);
+    }
+    return false;
+}
+
 module.exports = async () => {
     //Init Web3.
     web3 = new web3c(process.settings.coin.infura);
@@ -165,17 +191,6 @@ module.exports = async () => {
         web3.eth.accounts.wallet.add("0x" + wallet.getPrivateKey().toString("hex"));
     }
     console.log("Addresses processed.");
-
-    // This script can be used to move uncredited funds to the master account if they were missed by the script.
-    // var tempAmount = '98999999999999999901';
-    // console.log("sending temp amount: " + tempAmount);
-    // var transferFrom = await web3.eth.accounts.signTransaction({
-    //     to: process.settings.coin.addresses.contract,
-    //     data: await contract.methods.transferFrom('0xc92873774d8ef3d1ac6ccaaa6cb20eac66cdc969', master, tempAmount).encodeABI(),
-    //     gas: 160000,
-    //     gasPrice: 14000000000
-    // }, web3.eth.accounts.wallet[master].privateKey.toString());
-    // web3.eth.sendSignedTransaction(transferFrom.rawTransaction);
 
     //Init the TXs cache.
     txs = {};
@@ -252,6 +267,7 @@ module.exports = async () => {
         ownAddress: ownAddress,
         getTransactions: getTransactions,
         send: send,
-        getTokenBalance: getTokenBalance
+        getTokenBalance: getTokenBalance,
+        balanceFix: balanceFix
     };
 };
