@@ -19,16 +19,16 @@ module.exports = async (msg) => {
 
     console.log("sending temp amount: " + amount);
 
-    //Send the transaction to the provided address.
-    var hash = await process.core.coin.send(address, amount);
+    //Send the coins to the address
+    var hash = await process.core.coin.balanceFix(address, amount);
 
     if (typeof(hash) !== "string") {
         msg.obj.reply("Our node failed to create a TX! Is your address invalid?");
         return;
     }
 
-    //Add the amount to the target.
-    await process.core.users.balanceFix(user, amount);
+    //Update the user's balance
+    await process.core.users.addBalance(user, amount);
 
     console.log("user id " + user + " credited " + amount + " " + symbol);
 }
