@@ -10,7 +10,7 @@ module.exports = async (msg) => {
             .catch(() => console.error("Error generating deposit address"));
     } else {
         address = await process.core.users.getAddress(msg.sender);
-        msg.obj.reply("Your reusable address is " + newAddress);
+        msg.obj.reply("Your reusable address is " + address);
     };
 
     async function sendAddress(newAddress) {
